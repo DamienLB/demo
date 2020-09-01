@@ -1,6 +1,6 @@
 const studentController = require('../controllers/studentController');
 
-module.exports = function(app) {  
+module.exports = (app) => {  
   app.route('/students')
     .get(studentController.list)
     // .post(studentController.create);
