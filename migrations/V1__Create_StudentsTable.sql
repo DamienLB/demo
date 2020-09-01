@@ -2,7 +2,7 @@ CREATE TABLE `students` (
   `id` mediumint(8) unsigned NOT NULL auto_increment,
   `firstname` varchar(255) NOT NULL,
   `lastname` varchar(255) NOT NULL,
-  `birthday` datetime NOT NULL,
+  `dob` datetime NOT NULL,
   `address` varchar(255) default NULL,
   PRIMARY KEY (`id`)
 ) AUTO_INCREMENT=1;
@@ -10,7 +10,7 @@ CREATE TABLE `students` (
 CREATE INDEX idx_firstname ON students (firstname);
 CREATE INDEX idx_lastname ON students (lastname);
 
-INSERT INTO `students` (`firstname`,`lastname`,`birthday`,`address`)
+INSERT INTO `students` (`firstname`,`lastname`,`dob`,`address`)
 VALUES ("Lynn","Mooney","2004-11-12 11:25:25","Ap #690-8995 Volutpat. Road"),
   ("Austin","Holloway","2000-10-16 10:14:47","P.O. Box 213, 9543 Mattis Road"),
   ("Jack","Paul","2001-01-07 21:53:15","Ap #604-7228 Augue St."),
