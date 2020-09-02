@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes/studentRoutes');
 require ('./db');
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 3000;
 app.listen(port);
 
 console.log('API server started on: ' + port);

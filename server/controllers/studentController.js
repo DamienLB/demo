@@ -1,4 +1,4 @@
-const { listAll, getById, updateById } = require('../model/studentModel.js');
+const { listAll, getById, updateById } = require('../models/studentModel.js');
 
 
 exports.list = (req, res) => {
