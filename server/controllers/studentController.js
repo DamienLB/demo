@@ -3,9 +3,10 @@ const { listAll, getById, updateById } = require('../models/studentModel.js');
 
 exports.list = (req, res) => {
   try {
+    const filters = req.query.firstname || req.query.lastname ? { firstname: req.query.firstname, lastname: req.query.lastname } : false;
     listAll((results) => {
       res.json(results);
-    });
+    }, filters);
   } catch (e) {
     res.status(500).send(e);
   }
