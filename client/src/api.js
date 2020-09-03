@@ -55,7 +55,14 @@ export const fetchStudentList = async (dispatch, firstname='', lastname='') => {
 
 export const updateStudent = async (dispatch, id, address, dob) => {
   try {
-    const response = await fetch(`${apihost}/students/${id}`, { method: 'PUT' });
+    const response = await fetch(`${apihost}/students/${id}`,
+    { 
+      method: 'PUT',
+      body: JSON.stringify({ address, dob }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
     
     if (response.statusCode === 500) {
       throw new Error(`there was an error updating student with id ${id}`);

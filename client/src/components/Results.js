@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { fetchStudent } from '@api';
 import { Context } from '@store';
 

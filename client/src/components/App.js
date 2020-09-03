@@ -1,7 +1,7 @@
 import React from 'react';
 import Store from '@store';
 import LeftMenu from '@components/LeftMenu';
-import Body from '@components/Body';
+import StudentView from '@components/StudentView';
 
 
 const App = () => {
@@ -9,6 +9,7 @@ const App = () => {
     <Store>
       <div className="wrapper">
         <LeftMenu />
+        <StudentView />
       </div>
     </Store>
   );

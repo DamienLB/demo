@@ -27,7 +27,6 @@ return (
         <label>First Name: </label> 
         <input
           value={firstname}
-          size="12"
           onChange={updateFirstname}
         />
       </div>
@@ -35,7 +34,6 @@ return (
         <label>Last Name: </label> 
         <input
           value={lastname}
-          size="12"
           onChange={updateLastname}
         />
       </div>
