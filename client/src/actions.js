@@ -1,36 +1,64 @@
-export const SET_SEARCH_LAST_ON = 'SET_SEARCH_LAST_ON';
-export const SET_SEARCH_LAST_OFF = 'SET_SEARCH_LAST_OFF';
-export const SET_SEARCH_FIRST_ON = 'SET_SEARCH_FIRST_ON';
-export const SET_SEARCH_FIRST_OFF = 'SET_SEARCH_FIRST_OFF';
-export const SET_SEARCH_TEXTFIELD = 'SET_SEARCH_TEXTFIELD';
+export const SET_SEARCH_LAST= 'SET_SEARCH_LAST';
+export const SET_SEARCH_FIRST= 'SET_SEARCH_FIRST';
 export const SET_RESULTS = 'SET_RESULTS';
 export const SET_SELECTED_STUDENT = 'SET_SELECTED_STUDENT';
+export const EDIT_ADDRESS = 'EDIT_ADDRESS';
+export const EDIT_DOB = 'EDIT_DOB';
+export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
+
+export const ERROR = {
+  STUDENT_NOT_FOUND: 'STUDENT_NOT_FOUND',
+  FETCH_STUDENT: 'FETCH_STUDENT',
+  UPDATE_STUDENT: 'UPDATE_STUDENT',
+  FETCH_STUDENT_LIST: 'FETCH_STUDENT_LIST',
+}
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 
-export const setSearchLastOn = () => {
-  return { type: SET_SEARCH_LAST_ON };
+export const setSearchLast = (text) => {
+  return { type: SET_SEARCH_LAST, text };
 }
 
-export const setSearchLastOff = () => {
-  return { type: SET_SEARCH_LAST_OFF };
-}
-
-export const setSearchFirstOn = () => {
-  return { type: SET_SEARCH_FIRST_ON };
-}
-
-export const setSearchFirstOff = () => {
-  return { type: SET_SEARCH_FIRST_OFF };
-}
-
-export const setSearchTextField = (text) => {
-  return { type: SET_SEARCH_TEXTFIELD, text };
+export const setSearchFirst = (text) => {
+  return { type: SET_SEARCH_FIRST, text };
 }
 
 export const setResults = (results) => {
   return { type: SET_RESULTS, results };
 }
 
-export const setSelectedStudent = (id, firstname, lastname, address, dob) => {
-  return { type: SET_SELECTED_STUDENT, id, firstname, lastname, address, dob };
+export const setSelectedStudent = (student) => {
+  return { type: SET_SELECTED_STUDENT, student };
+}
+
+export const editAddress = (address) => {
+  return { type: EDIT_ADDRESS, address };
+}
+
+export const editDOB = (dob) => {
+  return { type: EDIT_DOB, dob };
+}
+
+export const updateSuccess = () => {
+  return { type: UPDATE_SUCCESS };
+}
+
+export const studentNotFound = () => {
+  return { type: ERROR.STUDENT_NOT_FOUND };
+}
+
+export const fetchStudentError = () => {
+  return { type: ERROR.FETCH_STUDENT };
+}
+
+export const updateStudentError = () => {
+  return { type: ERROR.UPDATE_STUDENT };
+}
+
+export const fetchStudentListError = () => {
+  return { type: ERROR.FETCH_STUDENT_LIST };
+}
+
+export const clearErrors = () => {
+  return { type: CLEAR_ERRORS };
 }

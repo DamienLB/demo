@@ -1,52 +1,43 @@
 import {
-  SET_SEARCH_LAST_ON,
-  SET_SEARCH_LAST_OFF,
-  SET_SEARCH_FIRST_ON,
-  SET_SEARCH_FIRST_OFF,
-  SET_SEARCH_TEXTFIELD,
+  SET_SEARCH_LAST,
+  SET_SEARCH_FIRST,
   SET_RESULTS,
   SET_SELECTED_STUDENT,
+  EDIT_ADDRESS,
+  EDIT_DOB,
+  ERROR,
+  CLEAR,
+  UPDATE_SUCCESS,
  } from '@actions';
 
 
 export const initialState = {
-  searchLastname: false,
-  searchFirstname: false,
-  searchTextField: '', 
+  searchLastname: '',
+  searchFirstname: '',
   searchResults: [],
   selectedId: null,
   selectedFirstName: '',
   selectedLastName: '',
   selectedAddress: '',
   selectedDOB: '',
+  studentNotFound: false,
+  fetchStudentError: false,
+  updateStudentError: false,
+  fetchStudentListError: false,
+  updateSuccessMessage: false,
 };
 
 export const reducer = (state, action) => {
   switch(action.type) {
-    case SET_SEARCH_LAST_ON:
+    case SET_SEARCH_LAST:
       return {
         ...state,
-        searchLastname: true,
+        searchLastname: action.text,
       };
-    case SET_SEARCH_LAST_OFF:
+    case SET_SEARCH_FIRST:
       return {
         ...state,
-        searchLastname: false,
-      };
-    case SET_SEARCH_FIRST_ON:
-      return {
-        ...state,
-        searchFirstname: true,
-      };
-    case SET_SEARCH_FIRST_OFF:
-      return {
-        ...state,
-        searchFirstname: false,
-      };
-    case SET_SEARCH_TEXTFIELD:
-      return {
-        ...state,
-        searchTextField: action.text,
+        searchFirstname: action.text,
       };
     case SET_RESULTS:
       return {
@@ -56,11 +47,55 @@ export const reducer = (state, action) => {
     case SET_SELECTED_STUDENT:
       return {
         ...state,
-        selectedId: action.id,
-        selectedFirstName: action.firstname,
-        selectedLastName: action.lastname,
+        selectedId: action.student.id,
+        selectedFirstName: action.student.firstname,
+        selectedLastName: action.student.lastname,
+        selectedAddress: action.student.address,
+        selectedDOB: action.student.dob,
+      };
+    case EDIT_ADDRESS:
+      return {
+        ...state,
         selectedAddress: action.address,
+      };
+    case EDIT_DOB:
+      return {
+        ...state,
         selectedDOB: action.dob,
       };
+    case ERROR.STUDENT_NOT_FOUND:
+      return {
+        ...state,
+        studentNotFound: true,
+      }
+    case ERROR.FETCH_STUDENT:
+      return {
+        ...state,
+        fetchStudentError: true,
+      }
+    case ERROR.UPDATE_STUDENT:
+      return {
+        ...state,
+        updateStudentError: true,
+      }
+    case ERROR.FETCH_STUDENT_LIST:
+      return {
+        ...state,
+        fetchStudentListError: true,
+      }
+    case UPDATE_SUCCESS:
+      return {
+        ...state,
+        updateSuccessMessage: true
+    case CLEAR:
+      return {
+        ...state,
+        studentNotFound: false,
+        fetchStudentError: false,
+        updateStudentError: false,
+        fetchStudentListError: false,
+        fetchStudentListError: false,
+        updateSuccessMessage: false,
+      }
   }
 }
