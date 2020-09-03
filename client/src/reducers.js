@@ -1,6 +1,4 @@
 import {
-  SET_SEARCH_LAST,
-  SET_SEARCH_FIRST,
   SET_RESULTS,
   SET_SELECTED_STUDENT,
   EDIT_ADDRESS,
@@ -12,8 +10,6 @@ import {
 
 
 export const initialState = {
-  searchLastname: '',
-  searchFirstname: '',
   searchResults: [],
   selectedId: null,
   selectedFirstName: '',
@@ -29,16 +25,6 @@ export const initialState = {
 
 export const reducer = (state, action) => {
   switch(action.type) {
-    case SET_SEARCH_LAST:
-      return {
-        ...state,
-        searchLastname: action.text,
-      };
-    case SET_SEARCH_FIRST:
-      return {
-        ...state,
-        searchFirstname: action.text,
-      };
     case SET_RESULTS:
       return {
         ...state,
@@ -67,26 +53,27 @@ export const reducer = (state, action) => {
       return {
         ...state,
         studentNotFound: true,
-      }
+      };
     case ERROR.FETCH_STUDENT:
       return {
         ...state,
         fetchStudentError: true,
-      }
+      };
     case ERROR.UPDATE_STUDENT:
       return {
         ...state,
         updateStudentError: true,
-      }
+      };
     case ERROR.FETCH_STUDENT_LIST:
       return {
         ...state,
         fetchStudentListError: true,
-      }
+      };
     case UPDATE_SUCCESS:
       return {
         ...state,
-        updateSuccessMessage: true
+        updateSuccessMessage: true,
+      };
     case CLEAR:
       return {
         ...state,
@@ -96,6 +83,6 @@ export const reducer = (state, action) => {
         fetchStudentListError: false,
         fetchStudentListError: false,
         updateSuccessMessage: false,
-      }
+      };
   }
 }

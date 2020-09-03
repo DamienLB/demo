@@ -4,10 +4,9 @@
     ["@babel/preset-env",
     {
       "targets": {
-      "chrome": "58",
-      "ie": "11",
-      "safari": "10",
-      "firefox": "60"
+      "chrome": "80",
+      "safari": "12",
+      "firefox": "70"
       },
       "include": ["@babel/plugin-transform-spread"],
       "useBuiltIns": "entry",

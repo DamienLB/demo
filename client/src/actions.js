@@ -12,7 +12,7 @@ export const ERROR = {
   UPDATE_STUDENT: 'UPDATE_STUDENT',
   FETCH_STUDENT_LIST: 'FETCH_STUDENT_LIST',
 }
-export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const CLEAR = 'CLEAR';
 
 
 export const setSearchLast = (text) => {
@@ -59,6 +59,6 @@ export const fetchStudentListError = () => {
   return { type: ERROR.FETCH_STUDENT_LIST };
 }
 
-export const clearErrors = () => {
-  return { type: CLEAR_ERRORS };
+export const clear = () => {
+  return { type: CLEAR };
 }

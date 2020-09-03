@@ -1,4 +1,4 @@
-const {
+import {
   setResults,
   setSelectedStudent,
   updateSuccess,
@@ -7,6 +7,7 @@ const {
   updateStudentError,
   fetchStudentListError,
 } from '@actions';
+
 
 const apihost = 'http://localhost:3000';
 
