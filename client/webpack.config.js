@@ -8,6 +8,17 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: `main.js`,
   },
+  resolve: {
+    alias: {
+      '@components': path.resolve(__dirname, 'src/components'),
+      '@helpers': path.resolve(__dirname, 'src/helpers'),
+      '@stylesheets': path.resolve(__dirname, 'src/stylesheets'),
+      '@api': path.resolve(__dirname, 'src/api'),
+      '@actions': path.resolve(__dirname, 'src/actions'),
+      '@reducers': path.resolve(__dirname, 'src/reducers'),
+      '@store': path.resolve(__dirname, 'src/store'),
+    },
+  },
   module: {
     rules: [
       {
