@@ -1,5 +1,3 @@
-export const SET_SEARCH_LAST= 'SET_SEARCH_LAST';
-export const SET_SEARCH_FIRST= 'SET_SEARCH_FIRST';
 export const SET_RESULTS = 'SET_RESULTS';
 export const SET_SELECTED_STUDENT = 'SET_SELECTED_STUDENT';
 export const EDIT_ADDRESS = 'EDIT_ADDRESS';
@@ -13,15 +11,6 @@ export const ERROR = {
   FETCH_STUDENT_LIST: 'FETCH_STUDENT_LIST',
 }
 export const CLEAR = 'CLEAR';
-
-
-export const setSearchLast = (text) => {
-  return { type: SET_SEARCH_LAST, text };
-}
-
-export const setSearchFirst = (text) => {
-  return { type: SET_SEARCH_FIRST, text };
-}
 
 export const setResults = (results) => {
   return { type: SET_RESULTS, results };

@@ -3,7 +3,7 @@ import { fetchStudentList } from '@api';
 import { Context } from '@store';
 
 
-const LeftMenu = () => {
+const Search = () => {
   const [null_, dispatch] = useContext(Context);
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
@@ -43,4 +43,4 @@ return (
   );
 };
 
-export default LeftMenu;
+export default Search;
