@@ -17,6 +17,7 @@ export const initialState = {
   selectedAddress: '',
   selectedDOB: '',
   studentNotFound: false,
+  firstFetch: false,
   fetchStudentError: false,
   updateStudentError: false,
   fetchStudentListError: false,
@@ -29,6 +30,7 @@ export const reducer = (state, action) => {
       return {
         ...state,
         searchResults: action.results,
+        firstFetch: true,
       };
     case SET_SELECTED_STUDENT:
       return {

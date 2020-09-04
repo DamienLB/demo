@@ -20,7 +20,7 @@ const Record = () => {
   } = state;
 
   const updateAddress = (e) => {
-    dispatch(editAddress(e.target.value.trim()));
+    dispatch(editAddress(e.target.value));
   }
 
   const updateDOB = (date) => {
@@ -29,7 +29,7 @@ const Record = () => {
   }
 
   const saveStudent = () => {
-    updateStudent(dispatch, selectedId, selectedAddress, selectedDOB);
+    updateStudent(dispatch, selectedId, selectedAddress.trim(), selectedDOB);
   }
 
  let message;

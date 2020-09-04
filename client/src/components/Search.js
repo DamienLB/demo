@@ -11,17 +11,17 @@ const Search = () => {
   const [lastname, setLastname] = useState('');
 
   useEffect(() => {
-    fetchStudentList(dispatch, firstname, lastname);
+    fetchStudentList(dispatch, firstname.trim(), lastname.trim());
   }, [firstname, lastname]);
 
   const updateFirstname = (e) => {
     dispatch(clear());
-    setFirstname(e.target.value.trim());
+    setFirstname(e.target.value);
   }
 
   const updateLastname = (e) => {
     dispatch(clear());
-    setLastname(e.target.value.trim());
+    setLastname(e.target.value);
   }
   
   let message;

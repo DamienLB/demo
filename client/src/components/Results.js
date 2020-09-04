@@ -6,7 +6,7 @@ import { Context } from '@store';
 
 const Results = () => {
   const [state, dispatch] = useContext(Context);
-  const { searchResults } = state;
+  const { searchResults, firstFetch } = state;
 
   const getStudent = (id) => {
     dispatch(clear());
@@ -25,13 +25,13 @@ const Results = () => {
     );
   });
 
-  if (!resultItems.length) {
+  if (!resultItems.length && firstFetch) {
     resultItems = (<div className="bg-info">No results found.</div>);
   }
 
   return (
     <div className="results-box">
-      <h4>Results:</h4>
+      <h4>Records:</h4>
       <div className="results">
         {resultItems}
       </div>
