@@ -8,6 +8,7 @@ exports.getById = (studentId, resultfn) => {
 
 exports.listAll = (resultfn, filters) => {
   let query = "Select * from students";
+  const order = "order by lastname ASC, firstname ASC, id ASC";
   if (filters) {
     const { lastname, firstname } = filters;
     const likestatements = [];
@@ -17,7 +18,7 @@ exports.listAll = (resultfn, filters) => {
     query = `${query} WHERE ${likestatements.join(" AND ")}`;
   }
   
-  sql.query(query, resultfn);    
+  sql.query(`${query} ${order}`, resultfn);    
 };
 
 exports.updateById = (studentId, studentdata, resultfn) => {
