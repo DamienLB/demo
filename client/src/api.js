@@ -1,4 +1,5 @@
 import {
+  RESULTS_LIMIT,
   setResults,
   setSelectedStudent,
   updateSuccess,
@@ -36,10 +37,10 @@ export const fetchStudentList = async (dispatch, firstname='', lastname='') => {
     const query = [];
 
     if (firstname) query.push(`firstname=${firstname}`);
-
     if (lastname) query.push(`lastname=${lastname}`);
+
     // API_HOST is env var defined by webpack
-    const response = await fetch(`${API_HOST}/students?${query.join('&')}`);
+    const response = await fetch(`${API_HOST}/students?limit=${RESULTS_LIMIT}&${query.join('&')}`);
 
     if (response.statusCode === 500) {
       throw new Error(`there was an error fetching the student list`);

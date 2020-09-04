@@ -11,6 +11,8 @@ import {
 
 export const initialState = {
   searchResults: [],
+  pages: [],
+  resultsCount: 0,
   selectedId: null,
   selectedFirstName: '',
   selectedLastName: '',
@@ -27,10 +29,22 @@ export const initialState = {
 export const reducer = (state, action) => {
   switch(action.type) {
     case SET_RESULTS:
+      const { results, count } = action.results;
+      const lastresult = results[results.length -1];
+      const newpages = state.pages.slice();
+
+      // save this info for key based pagination
+      newpages.push({
+        firstnamekey: lastresult.firstname,
+        lastnamekey: lastresult.lastname,
+        idkey: lastresult.id,
+      });
       return {
         ...state,
-        searchResults: action.results,
+        searchResults: results,
+        resultsCount: count,
         firstFetch: true,
+        pages: newpages,
       };
     case SET_SELECTED_STUDENT:
       return {

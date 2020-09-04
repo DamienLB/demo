@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { fetchStudent } from '@api';
 import { clear } from '@actions';
 import { Context } from '@store';
+import Pagination from '@components/Pagination';
 
 
 const Results = () => {
@@ -32,6 +33,7 @@ const Results = () => {
   return (
     <div className="results-box">
       <h4>Records:</h4>
+      <Pagination />
       <div className="results">
         {resultItems}
       </div>

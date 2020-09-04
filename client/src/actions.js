@@ -1,3 +1,5 @@
+export const RESULTS_LIMIT = 20;
+
 export const SET_RESULTS = 'SET_RESULTS';
 export const SET_SELECTED_STUDENT = 'SET_SELECTED_STUDENT';
 export const EDIT_ADDRESS = 'EDIT_ADDRESS';
