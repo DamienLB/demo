@@ -1,20 +1,27 @@
 const { listAll, getById, updateById } = require('../models/studentModel.js');
 
 
+const handleError = (res, err) => {
+  console.error(err);
+  res.status(500).send(err);
+}
+
 exports.list = (req, res) => {
   try {
     const filters = req.query.firstname || req.query.lastname ? { firstname: req.query.firstname, lastname: req.query.lastname } : false;
-    listAll((results) => {
+    listAll((err, results) => {
+      if (err) return handleError(res, err);
       res.json(results);
     }, filters);
   } catch (e) {
-    res.status(500).send(e);
+    handleError(res, e);
   }
 };
 
 exports.read = (req, res) => {
   try {
-    getById(req.params.studentId, (results) => {
+    getById(req.params.studentId, (err, results) => {
+      if (err) return handleError(res, err);
       if (!results.length) {
         res.status(404).send('not found');
         return;
@@ -23,16 +30,17 @@ exports.read = (req, res) => {
       res.json(results[0]);
     });
   } catch (e) {
-    res.status(500).send(e);
+    handleError(res, e);
   }
 };
 
 exports.update = (req, res) => {
   try {
-    updateById(req.params.studentId, (results) => {
+    updateById(req.params.studentId, req.body, (err, results) => {
+      if (err) handleError(res, err);
       res.status(200).send({ success: true });
     });
   } catch (e) {
-    res.status(500).send(e);
+    handleError(res, e);
   }
 };

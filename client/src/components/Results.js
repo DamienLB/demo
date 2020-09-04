@@ -1,16 +1,23 @@
 import React, { useContext } from 'react';
 import { fetchStudent } from '@api';
+import { clear } from '@actions';
 import { Context } from '@store';
 
 
 const Results = () => {
   const [state, dispatch] = useContext(Context);
   const { searchResults } = state;
-  const resultItems = searchResults.map(student => {
+
+  const getStudent = (id) => {
+    dispatch(clear());
+    fetchStudent(dispatch, id);
+  }
+
+  let resultItems = searchResults.map(student => {
     return (
       <div
         className="result-item"
-        onClick={ () => fetchStudent(dispatch, student.id) }
+        onClick={ () =>  getStudent(student.id) }
         key={student.id}
       >
         {student.lastname}, {student.firstname}
@@ -18,8 +25,17 @@ const Results = () => {
     );
   });
 
+  if (!resultItems.length) {
+    resultItems = (<div className="bg-info">No results found.</div>);
+  }
+
   return (
-    <div className="results">{resultItems}</div>
+    <div className="results-box">
+      <h4>Results:</h4>
+      <div className="results">
+        {resultItems}
+      </div>
+    </div>
   );
 };
 

@@ -1,15 +1,16 @@
 import React from 'react';
 import Store from '@store';
 import LeftMenu from '@components/LeftMenu';
-import StudentView from '@components/StudentView';
-
+import Record from '@components/Record';
+import '@stylesheets/main.scss';
 
 const App = () => {
   return (
     <Store>
-      <div className="wrapper">
+      <div className="header">Red River Demo</div>
+      <div className="main">
         <LeftMenu />
-        <StudentView />
+        <Record />
       </div>
     </Store>
   );

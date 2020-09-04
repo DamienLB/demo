@@ -1,28 +1,37 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { fetchStudentList } from '@api';
+import { clear } from '@actions';
 import { Context } from '@store';
 
 
 const Search = () => {
-  const [null_, dispatch] = useContext(Context);
+  const [state, dispatch] = useContext(Context);
+  const { fetchStudentError } = state;
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
-
 
   useEffect(() => {
     fetchStudentList(dispatch, firstname, lastname);
   }, [firstname, lastname]);
 
   const updateFirstname = (e) => {
+    dispatch(clear());
     setFirstname(e.target.value.trim());
   }
+
   const updateLastname = (e) => {
+    dispatch(clear());
     setLastname(e.target.value.trim());
   }
+  
+  let message;
+  if (fetchStudentError) {
+    message = (<div className="bg-danger">There was a server error.</div>);
+  }
 
-return (
+  return (
     <div className="search">
-      <h3>Search by:</h3>
+      <h3>Filter by:</h3>
       <div>
         <label>First Name: </label> 
         <input
@@ -37,6 +46,7 @@ return (
           onChange={updateLastname}
         />
       </div>
+      {message}
     </div>
   );
 };

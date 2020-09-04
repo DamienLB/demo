@@ -1,14 +1,9 @@
+const date = require('date-and-time');
 const sql = require('../db.js');
 
-const handler = (resultfn) => (err, res) => {            
-  if (err) {
-    throw new Error(err);
-  }
-  resultfn(res);
-};
 
 exports.getById = (studentId, resultfn) => {
-  sql.query("Select * from students where id = ? ", studentId, handler(resultfn));   
+  sql.query("Select * from students where id = ? ", studentId, resultfn);   
 };
 
 exports.listAll = (resultfn, filters) => {
@@ -22,10 +17,13 @@ exports.listAll = (resultfn, filters) => {
     query = `${query} WHERE ${likestatements.join(" AND ")}`;
   }
   
-  sql.query(query, handler(resultfn));    
+  sql.query(query, resultfn);    
 };
 
 exports.updateById = (studentId, studentdata, resultfn) => {
   const { dob, address } = studentdata;
-  sql.query("UPDATE students SET dob = ?, address = ? WHERE id = ?", [dob, address, studentId], handler(result)); 
+  const dobDate = new Date(dob);
+  const formattedDob = date.format(dobDate, 'YYYY/MM/DD HH:mm:ss'); 
+
+  sql.query("UPDATE students SET dob = ?, address = ? WHERE id = ?", [formattedDob, address, studentId], resultfn); 
 };
