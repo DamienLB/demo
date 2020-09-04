@@ -7,3 +7,5 @@ This is a simple demo application that uses Express/Node.js to create a simple b
   - Clone the repo and run `$ docker-compose up`
   - Navigate to [http://localhost:8080]
 
+[Docker Desktop]: https://www.docker.com/products/docker-desktop
+[http://localhost:8080]: http://localhost:8080
