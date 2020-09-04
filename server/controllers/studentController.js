@@ -1,4 +1,4 @@
-const { listAll, getById, updateById } = require('../models/studentModel.js');
+const { listAll, listAllCount, getById, updateById } = require('../models/studentModel.js');
 
 
 const handleError = (res, err) => {
@@ -9,9 +9,12 @@ const handleError = (res, err) => {
 exports.list = (req, res) => {
   try {
     const filters = req.query.firstname || req.query.lastname ? { firstname: req.query.firstname, lastname: req.query.lastname } : false;
-    listAll((err, results) => {
-      if (err) return handleError(res, err);
-      res.json(results);
+    listAllCount((counterr, rows) => {
+      if (counterr) return handleError(res, counterr);
+      listAll((err, results) => {
+        if (err) return handleError(res, err);
+        res.json({results, count: rows[0].total });
+      }, filters);
     }, filters);
   } catch (e) {
     handleError(res, e);
