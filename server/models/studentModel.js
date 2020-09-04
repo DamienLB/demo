@@ -7,7 +7,7 @@ const applyFilters = (query, filters=false) => {
   const params = [];
   if (filters) {
     // extract filters; non-existent filters will be undefined.
-    const { lastname, firstname, idkey, lastnamekey, firstnamekey } = filters;
+    const { lastname, firstname } = filters;
     const wherestatements = [];
 
     if (lastname) {
@@ -20,21 +20,6 @@ const applyFilters = (query, filters=false) => {
       params.push(`${firstname}%`);
     }
 
-    if (lastnamekey) {
-      wherestatements.push(`lastname > ?`);
-      params.push(lastnamekey);
-    }
-
-    if (firstnamekey) {
-      wherestatements.push(`firstname > ?`);
-      params.push(firstnamekey);
-    }
-
-    if (idkey) {
-      wherestatements.push(`id > ?`);
-      params.push(idkey);
-    }
-
     newquery = `${newquery} WHERE ${wherestatements.join(" AND ")}`;
   }
   return [newquery, params];
@@ -44,12 +29,11 @@ exports.getById = (studentId, resultfn) => {
   sql.query("Select * from students where id = ? ", studentId, resultfn);
 };
 
-exports.listAll = (resultfn, filters=false, limit=10000) => {
+exports.listAll = (resultfn, filters=false, limit=10000, offset=0) => {
   let query = "Select * from students";
   const order = "order by lastname ASC, firstname ASC, id ASC";
 
-  let limitstatement;
-  if (limit) limitstatement = `LIMIT ${limit}`;
+  const limitstatement = `LIMIT ${limit} OFFSET ${offset}`;
   [filteredquery, params] = applyFilters(query, filters);
   sql.query(`${filteredquery} ${order} ${limitstatement}`, params, resultfn);    
 };

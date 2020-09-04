@@ -23,17 +23,17 @@ const createFilters = (filternames, req) => {
 exports.list = (req, res) => {
   try {
     const filters = createFilters(['firstname', 'lastname'], req);
-    
+    // get the count to include in response with data for pagination
     listAllCount((counterr, rows) => {
       if (counterr) return handleError(res, counterr);
       
-      const allfilters = createFilters(['firstname', 'lastname', 'firstnamekey', 'lastnamekey', 'idkey'], req);
       const limit = req.query.limit;
+      const offset = req.query.offset;
 
       listAll((err, results) => {
         if (err) return handleError(res, err);
-        res.json({results, count: rows[0].total });
-      }, allfilters, limit);
+        res.json({results, count: rows[0].total, offset });
+      }, filters, limit, offset);
 
     }, filters);
   } catch (e) {

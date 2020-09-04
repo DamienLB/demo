@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { fetchStudentList } from '@api';
-import { clear, setFirstname, setLastname, slicePages } from '@actions';
+import { clear, setFirstname, setLastname } from '@actions';
 import { Context } from '@store';
 
 
@@ -15,15 +15,11 @@ const Search = () => {
 
   const updateFirstname = (e) => {
     dispatch(clear());
-    // this resets the pages in state to prepare for new batch
-    dispatch(slicePages(0));
     dispatch(setFirstname(e.target.value));
   }
 
   const updateLastname = (e) => {
     dispatch(clear());
-    // this resets the pages in state to prepare for new batch
-    dispatch(slicePages(0));
     dispatch(setLastname(e.target.value));
   }
   

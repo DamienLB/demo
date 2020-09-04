@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import { RESULTS_LIMIT, slicePages } from '@actions';
+import { RESULTS_LIMIT } from '@actions';
 import { fetchStudentList } from '@api';
 import { Context } from '@store';
 
 
-const NavLink = ({text, symbol, disabled}) => {
+const NavLink = ({text, symbol, disabled, action}) => {
   if (disabled) {
     return (
       <a className="page-link" href="#" aria-label={text} tabIndex="-1" aria-disabled="true">
@@ -14,7 +14,7 @@ const NavLink = ({text, symbol, disabled}) => {
     );
   }
   return (
-    <a className="page-link" href="#" aria-label={text}>
+    <a className="page-link" href="#" aria-label={text} onClick={action}>
       <span aria-hidden="true">{symbol}</span>
     </a>
   );
@@ -35,19 +35,17 @@ const PageLink = ({classes, name, action}) => {
 const Pagination = () => {
   const [state, dispatch] = useContext(Context);
   const {
-    pages,
     resultsCount,
+    resultsOffset,
     firstname,
     lastname,
   } = state;
-
-console.log(pages, resultsCount);
 
   // we show pagination only if there are more results than the limiter allows
   if (resultsCount === 0 || resultsCount < RESULTS_LIMIT) return null;
 
   // current page number is equal to pages.length
-  const currentPage = pages.length;
+  const currentPage = (resultsOffset + RESULTS_LIMIT) / RESULTS_LIMIT;
 
   // total pages is equal to ROUND UP(resultsCount / RESULTS_LIMIT)
   const totalPages = Math.ceil(resultsCount / RESULTS_LIMIT);
@@ -87,15 +85,12 @@ console.log(pages, resultsCount);
     disabled: nextBtnDisabled,
   });
 
-  const gotoPage = (n) => {
-    if (pages.length <= n) {
-      if (n < currentPage) {
-        // this keeps the pages stored in state up to date with the page retrieved
-        dispatch(slicePages(n));
-      }
-      const page = pages[n - 1];
-      const { firstnamekey, lastnamekey, idkey } = page;
-      fetchStudentList(firstname, lastname, firstnamekey, lastnamekey, idkey);
+  const gotoPage = (n) => {    
+    // if requested page is possible
+    if (n <= totalPages) {
+      const pageDiff = n - currentPage;
+      const newOffset = resultsOffset + (pageDiff * RESULTS_LIMIT);
+      fetchStudentList(dispatch, firstname, lastname, newOffset);
     }
   }
 

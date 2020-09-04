@@ -6,7 +6,6 @@ export const SET_LASTNAME = 'SET_LASTNAME';
 export const SET_SELECTED_STUDENT = 'SET_SELECTED_STUDENT';
 export const EDIT_ADDRESS = 'EDIT_ADDRESS';
 export const EDIT_DOB = 'EDIT_DOB';
-export const SLICE_PAGES = 'SLICE_PAGES';
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 
 export const ERROR = {
@@ -16,10 +15,6 @@ export const ERROR = {
   FETCH_STUDENT_LIST: 'FETCH_STUDENT_LIST',
 }
 export const CLEAR = 'CLEAR';
-
-export const slicePages = (n) => {
-  return { type: SLICE_PAGES, n };
-}
 
 export const setResults = (results) => {
   return { type: SET_RESULTS, results };

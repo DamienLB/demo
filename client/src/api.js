@@ -32,7 +32,7 @@ export const fetchStudent = async (dispatch, id) => {
   }
 }
 
-export const fetchStudentList = async (dispatch, firstname='', lastname='', firstnamekey='', lastnamekey='', idkey='') => {
+export const fetchStudentList = async (dispatch, firstname='', lastname='', offset=0) => {
   try {
     const query = [];
 
@@ -40,7 +40,7 @@ export const fetchStudentList = async (dispatch, firstname='', lastname='', firs
     if (lastname) query.push(`lastname=${lastname}`);
 
     // API_HOST is env var defined by webpack
-    const response = await fetch(`${API_HOST}/students?limit=${RESULTS_LIMIT}&${query.join('&')}`);
+    const response = await fetch(`${API_HOST}/students?limit=${RESULTS_LIMIT}&offset=${offset}&${query.join('&')}`);
 
     if (response.statusCode === 500) {
       throw new Error(`there was an error fetching the student list`);
