@@ -32,7 +32,7 @@ export const fetchStudent = async (dispatch, id) => {
   }
 }
 
-export const fetchStudentList = async (dispatch, firstname='', lastname='') => {
+export const fetchStudentList = async (dispatch, firstname='', lastname='', firstnamekey='', lastnamekey='', idkey='') => {
   try {
     const query = [];
 

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import classnames from 'classnames';
-import { RESULTS_LIMIT } from '@actions';
+import { RESULTS_LIMIT, slicePages } from '@actions';
 import { fetchStudentList } from '@api';
 import { Context } from '@store';
 
@@ -20,11 +20,25 @@ const NavLink = ({text, symbol, disabled}) => {
   );
 }
 
+const PageLink = ({classes, name, action}) => {
+  return (
+    <li
+      className={classes}>
+        <a
+          onClick={() => action(name)}
+          className="page-link"
+          href="#">{name}</a>
+    </li>
+  );
+}
+
 const Pagination = () => {
   const [state, dispatch] = useContext(Context);
   const {
     pages,
     resultsCount,
+    firstname,
+    lastname,
   } = state;
 
 console.log(pages, resultsCount);
@@ -73,17 +87,29 @@ console.log(pages, resultsCount);
     disabled: nextBtnDisabled,
   });
 
+  const gotoPage = (n) => {
+    if (pages.length <= n) {
+      if (n < currentPage) {
+        // this keeps the pages stored in state up to date with the page retrieved
+        dispatch(slicePages(n));
+      }
+      const page = pages[n - 1];
+      const { firstnamekey, lastnamekey, idkey } = page;
+      fetchStudentList(firstname, lastname, firstnamekey, lastnamekey, idkey);
+    }
+  }
+
   return (
     <nav aria-label="page navigation">
-      <ul className="pagination">
+      <ul className="pagination pagination-sm">
         <li className={previousBtnClass}>
-          <NavLink text="Previous" symbol="&laquo;" disabled={previousBtnDisabled} />
+          <NavLink text="Previous" symbol="&laquo;" disabled={previousBtnDisabled} action={() => gotoPage(currentPage - 1)}/>
         </li>
-        <li className={firstLinkClass}><a className="page-link" href="#">{firstPageName}</a></li>
-        <li className={secondLinkClass}><a className="page-link" href="#">{secondPageName}</a></li>
-        <li className={thirdLinkClass}><a className="page-link" href="#">{thirdPageName}</a></li>
+        <PageLink classes={firstLinkClass} name={firstPageName} action={gotoPage} />
+        <PageLink classes={secondLinkClass} name={secondPageName} action={gotoPage} />
+        <PageLink classes={thirdLinkClass} name={thirdPageName} action={gotoPage} />
         <li className={nextBtnClass}>
-          <NavLink text="Previous" symbol="&raquo;" disabled={nextBtnDisabled} />
+          <NavLink text="Previous" symbol="&raquo;" disabled={nextBtnDisabled} action={() => gotoPage(currentPage + 1)}/>
         </li>
       </ul>
     </nav>

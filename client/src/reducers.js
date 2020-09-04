@@ -1,8 +1,11 @@
 import {
   SET_RESULTS,
+  SET_FIRSTNAME,
+  SET_LASTNAME,
   SET_SELECTED_STUDENT,
   EDIT_ADDRESS,
   EDIT_DOB,
+  SLICE_PAGES,
   ERROR,
   CLEAR,
   UPDATE_SUCCESS,
@@ -11,6 +14,8 @@ import {
 
 export const initialState = {
   searchResults: [],
+  firstname: '',
+  lastname: '',
   pages: [],
   resultsCount: 0,
   selectedId: null,
@@ -46,6 +51,22 @@ export const reducer = (state, action) => {
         firstFetch: true,
         pages: newpages,
       };
+    case SET_FIRSTNAME:
+      return {
+        ...state,
+        firstname: action.text,
+      };
+    case SET_LASTNAME:
+      return {
+        ...state,
+        lastname: action.text,
+      };
+    case SLICE_PAGES: {
+      return {
+        ...state,
+        pages: state.pages.slice(0, action.n),
+      };
+    }  
     case SET_SELECTED_STUDENT:
       return {
         ...state,
