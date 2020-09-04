@@ -9,11 +9,10 @@ import {
 } from '@actions';
 
 
-const apihost = 'http://localhost:3000';
-
 export const fetchStudent = async (dispatch, id) => {
   try {
-    const response = await fetch(`${apihost}/students/${id}`);
+    // API_HOST is env var defined by webpack
+    const response = await fetch(`${API_HOST}/students/${id}`);
 
     if (response.statusCode === 404) {
       console.error(`student not found with id ${id}`);
@@ -39,7 +38,8 @@ export const fetchStudentList = async (dispatch, firstname='', lastname='') => {
     if (firstname) query.push(`firstname=${firstname}`);
 
     if (lastname) query.push(`lastname=${lastname}`);
-    const response = await fetch(`${apihost}/students?${query.join('&')}`);
+    // API_HOST is env var defined by webpack
+    const response = await fetch(`${API_HOST}/students?${query.join('&')}`);
 
     if (response.statusCode === 500) {
       throw new Error(`there was an error fetching the student list`);
@@ -55,7 +55,8 @@ export const fetchStudentList = async (dispatch, firstname='', lastname='') => {
 
 export const updateStudent = async (dispatch, id, address, dob) => {
   try {
-    const response = await fetch(`${apihost}/students/${id}`,
+    // API_HOST is env var defined by webpack
+    const response = await fetch(`${API_HOST}/students/${id}`,
     { 
       method: 'PUT',
       body: JSON.stringify({ address, dob }),

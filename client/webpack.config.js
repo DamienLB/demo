@@ -45,5 +45,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
+    new webpack.DefinePlugin({
+      API_HOST: JSON.stringify(process.env.API_HOST || 'http://localhost:3000'),
+    }),
   ],
 };
